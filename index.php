@@ -21,7 +21,7 @@ class HelloAttentionQuiz{
     }
 
     function haq_admin_assets(){
-        wp_enqueue_script( 'block', HAQ_URL . 'assets/js/block.js', array('wp-blocks','wp-element'), time(), true );
+        wp_enqueue_script( 'block', HAQ_URL . 'build/index.js', array('wp-blocks','wp-element'), time(), true );
     }
 
     function haq_assets(){
