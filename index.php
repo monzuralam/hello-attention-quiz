@@ -16,12 +16,24 @@ define( 'HAQ_URL', plugin_dir_url( __FILE__ ) );
 
 class HelloAttentionQuiz{
     function __construct(){
-        add_action('enqueue_block_editor_assets', array( $this, 'haq_admin_assets' ) );
+        add_action('init', array( $this, 'haq_admin_assets' ) );
         add_action('wp_enqueue_scripts', array( $this, 'haq_assets' ) );
     }
 
     function haq_admin_assets(){
         wp_enqueue_script( 'block', HAQ_URL . 'build/index.js', array('wp-blocks','wp-element'), time(), true );
+        register_block_type('hello-attention-quiz/are-you-paying-attention', array(
+            'editor_script'     =>  'block',
+            'render_callback'   =>  array($this, 'haq_render_html')
+        ));
+    }
+
+    function haq_render_html($attributes){
+        ob_start();
+        ?>
+        <h3>Today the sky is <?php $attributes['skyColor'] ?>and the grass is <?php $attributes['grassColor'] ?>.</h3>
+        <?php
+        return ob_get_clean();
     }
 
     function haq_assets(){
