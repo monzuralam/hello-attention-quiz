@@ -27,5 +27,18 @@ wp.blocks.registerBlockType("hello-attention-quiz/are-you-paying-attention", {
                 <p>Today the sky is {props.attributes.skyColor} and the grass is {props.attributes.grassColor}.</p>
             </div>
         );
-    }
+    },
+    deprecated: [{
+        attributes: {
+            skyColor: {type: "string"},
+            grassColor: {type: "string"},
+        },
+        save: function (props) {
+            return (
+                <div>
+                    <p>Today the sky is {props.attributes.skyColor} and the grass is {props.attributes.grassColor}.</p>
+                </div>
+            );
+        }
+    }]
 });
